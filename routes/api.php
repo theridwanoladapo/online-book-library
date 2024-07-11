@@ -14,5 +14,8 @@ Route::group([
     Route::post('refresh', [AuthorController::class, 'refresh']);
 });
 
+Route::get('/books/search', [BookController::class, 'search']);
+Route::get('/authors/search', [AuthorController::class, 'search']);
+
 Route::apiResource('books', BookController::class);
 Route::apiResource('authors', AuthorController::class);

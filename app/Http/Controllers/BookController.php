@@ -77,4 +77,22 @@ class BookController extends Controller
 
         return response()->json(null, 204);
     }
+
+    /**
+     * Search books.
+     */
+    public function search(Request $request)
+    {
+        // Search and retrieve books
+        $query = $request->input('query');
+        $books = Book::where('title', 'like', "%$query%")
+                    ->orWhereHas('author', function ($q) use ($query) {
+                        $q->where('name', 'like', "%$query%");
+                    })
+                    ->get();
+
+        return response()->json(
+            BookResource::collection($books)
+        );
+    }
 }

@@ -77,4 +77,19 @@ class AuthorController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function search(Request $request)
+    {
+        // Search and retrieve authors
+        $query = $request->input('query');
+        $authors = Author::where('name', 'like', "%$query%")
+                     ->orWhereHas('books', function ($q) use ($query) {
+                         $q->where('title', 'like', "%$query%");
+                     })
+                     ->get();
+
+        return response()->json(
+            AuthorResource::collection($authors)
+        );
+    }
 }
