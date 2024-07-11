@@ -23,8 +23,8 @@ class UpdateAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','max:255'],
-            'email' => ['required','string','max:255'],
+            'name' => ['sometimes','required','string','max:255'],
+            'email' => ['sometimes','required','string','max:255'],
             'biography' => ['nullable','string'],
         ];
     }
@@ -37,8 +37,8 @@ class UpdateAuthorRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'A name is required',
-            'email.required' => 'An email is required',
+            'name.required' => 'The name is required.',
+            'email.required' => 'The email is required.',
         ];
     }
 }

@@ -22,8 +22,8 @@ class UpdateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','max:255'],
-            'author_id' => ['required','exists:authors,id'],
+            'title' => ['sometimes','required','string','max:255'],
+            'author_id' => ['sometimes','required','exists:authors,id'],
             'description' => ['nullable','string'],
         ];
     }
@@ -36,8 +36,9 @@ class UpdateBookRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'A title is required',
-            'author_id.required' => 'An author is required',
+            'title.required' => 'The title is required.',
+            'author_id.required' => 'The author is required.',
+            'author_id.exists' => 'The selected author does not exist.',
         ];
     }
 }

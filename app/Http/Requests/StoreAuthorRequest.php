@@ -36,8 +36,8 @@ class StoreAuthorRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'A name is required',
-            'email.required' => 'An email is required',
+            'name.required' => 'The name is required.',
+            'email.required' => 'The email is required.',
         ];
     }
 }

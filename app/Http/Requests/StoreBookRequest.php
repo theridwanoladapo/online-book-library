@@ -36,8 +36,9 @@ class StoreBookRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'A title is required',
-            'author_id.required' => 'An author is required',
+            'title.required' => 'The title is required.',
+            'author_id.required' => 'The author is required.',
+            'author_id.exists' => 'The selected author does not exist.',
         ];
     }
 }
