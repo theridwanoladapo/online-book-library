@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 import Home from './components/Home';
 import BookDetails from './components/BookDetails';
 import AuthorDetails from './components/AuthorDetails';
@@ -11,16 +12,16 @@ const App = () => {
     return (
         <Router>
             <div className="App">
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/books/:id" component={BookDetails} />
-                    <Route path="/authors/:id" component={AuthorDetails} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/add-book" component={BookForm} />
-                    <Route path="/edit-book/:id" component={BookForm} />
-                    <Route path="/add-author" component={AuthorForm} />
-                    <Route path="/edit-author/:id" component={AuthorForm} />
-                </Switch>
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route path="/books/:id" element={<BookDetails />} />
+                    <Route path="/authors/:id" element={<AuthorDetails />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/add-book" element={<BookForm />} />
+                    <Route path="/edit-book/:id" element={<BookForm />} />
+                    <Route path="/add-author" element={<AuthorForm />} />
+                    <Route path="/edit-author/:id" element={<AuthorForm />} />
+                </Routes>
             </div>
         </Router>
     );

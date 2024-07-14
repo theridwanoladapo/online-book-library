@@ -29,7 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (UnauthorizedException $e, Request $request) {
             return response()->json([
                 'message' => 'Request Unauthorized',
-            ], 404);
+            ], 401);
         });
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             return response()->json([

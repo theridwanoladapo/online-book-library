@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../services/api';
 
 const AuthorForm = () => {
@@ -7,7 +7,7 @@ const AuthorForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [biography, setBiography] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
@@ -30,7 +30,7 @@ const AuthorForm = () => {
             } else {
                 await api.post('/authors', authorData);
             }
-            history.push('/');
+            navigate('/');
         } catch (error) {
             console.error('There was an error saving the author!', error);
         }
@@ -38,6 +38,14 @@ const AuthorForm = () => {
 
     return (
         <div>
+            <div className='menu'>
+                <ul>
+                    <li><Link className='link' to="/">Home</Link></li>
+                    <li><Link className='link' to="/add-book">Add Book</Link></li>
+                    <li><Link className='link' to="/add-author">Add Author</Link></li>
+                </ul>
+            </div>
+
             <h1>{id ? 'Edit Author' : 'Add Author'}</h1>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -53,7 +61,7 @@ const AuthorForm = () => {
                     <input
                         type="email"
                         value={email}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div>

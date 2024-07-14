@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../services/api';
 
 const Home = () => {
@@ -31,18 +32,36 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Books</h1>
-            <input
-                type="text"
-                placeholder="Search for books or authors..."
-                value={query}
-                onChange={handleSearch}
-            />
-            <ul>
-                {books.map(book => (
-                    <li key={book.id}>{book.title} by {book.author.name}</li>
-                ))}
-            </ul>
+            <div className='menu'>
+                <ul>
+                    <li><Link className='link' to="/">Home</Link></li>
+                    <li><Link className='link' to="/add-book">Add Book</Link></li>
+                    <li><Link className='link' to="/add-author">Add Author</Link></li>
+                </ul>
+            </div>
+
+            <h1 style={{"margin":"20px"}}>Books</h1>
+            <form>
+                <input
+                    type="text"
+                    placeholder="Search for books or authors..."
+                    value={query}
+                    onChange={handleSearch}
+                />
+            </form>
+            <div className='book-section' style={{"maxWidth":"600px","margin":"20px","padding":"10px 20px"}}>
+                <ul>
+                    {books.map(book => (
+                        <li key={book.id}>
+                            <div className='book'>
+                                <Link to={`/books/${book.id}`} className='book-title'>{book.title}</Link>
+                                <div className='book-description'>{book.description}</div>
+                                <Link to={`/authors/${book.author.id}`} className='book-author'>by: {book.author.name}</Link>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

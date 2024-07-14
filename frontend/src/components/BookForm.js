@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../services/api';
 
 const BookForm = () => {
@@ -8,7 +8,7 @@ const BookForm = () => {
     const [authorId, setAuthorId] = useState('');
     const [description, setDescription] = useState('');
     const [authors, setAuthors] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('/authors').then(response => {
@@ -35,7 +35,7 @@ const BookForm = () => {
             } else {
                 await api.post('/books', bookData);
             }
-            history.push('/');
+            navigate('/')
         } catch (error) {
             console.error('There was an error saving the book!', error);
         }
@@ -43,6 +43,14 @@ const BookForm = () => {
 
     return (
         <div>
+            <div className='menu'>
+                <ul>
+                    <li><Link className='link' to="/">Home</Link></li>
+                    <li><Link className='link' to="/add-book">Add Book</Link></li>
+                    <li><Link className='link' to="/add-author">Add Author</Link></li>
+                </ul>
+            </div>
+
             <h1>{id ? 'Edit Book' : 'Add Book'}</h1>
             <form onSubmit={handleSubmit}>
                 <div>

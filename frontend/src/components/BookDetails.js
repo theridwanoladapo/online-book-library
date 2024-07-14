@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import api from '../services/api';
 
 const BookDetails = () => {
@@ -20,6 +20,14 @@ const BookDetails = () => {
 
     return (
         <div>
+            <div className='menu'>
+                <ul>
+                    <li><Link className='link' to="/">Home</Link></li>
+                    <li><Link className='link' to="/add-book">Add Book</Link></li>
+                    <li><Link className='link' to="/add-author">Add Author</Link></li>
+                </ul>
+            </div>
+
             <h1>{book.title}</h1>
             <p>{book.description}</p>
             <p>Author: {book.author.name}</p>
